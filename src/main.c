@@ -10,6 +10,7 @@
 #include "juego_delaVida/juego_delaVida.h"
 #include "piedra_papel_tijera/piedra_papel_tijera.h"
 #include "tres_enRaya/tres_enRaya.h"
+#include "tragaperras/tragaperras.h"
 
 #define LINEAS_LICENCIA 500
 #define STR_LEN 128
@@ -31,6 +32,7 @@ int main(int argc, char *argv[]) {
         else if (strcmp(argv[1], "--vida") == 0) r = jugar_juego_delaVida();
         else if (strcmp(argv[1], "--ppt") == 0) r = jugar_piedra_papel_tijera();
         else if (strcmp(argv[1], "--tres") == 0) r = jugar_tres_enRaya();
+        else if (strcmp(argv[1], "--tragaperras") == 0) r = jugar_tragaperras();
         else if (strcmp(argv[1], "--license") == 0) {
             mostrar_licencia();
             r = 0;
@@ -41,9 +43,8 @@ int main(int argc, char *argv[]) {
             printf("  --buscaminas      Inicia el Buscaminas\n");
             printf("  --ahorcado        Inicia el Ahorcado\n");
             printf("  --robots          Inicia Robots\n");
-            printf("  --vida            Inicia Juego de la Vida\n");
-            printf("  --ppt             Inicia Piedra, Papel o Tijera\n");
-            printf("  --tres            Inicia Tres en Raya\n");
+            printf("  --tres_eRaya      Inicia Tres en Raya\n");
+            printf("  --tragaperras     Inicia la tragaperras\n");
             printf("  --license         Muestra la licencia del proyecto\n");
             printf("  --help            Muestra esta ayuda\n");
             r = 0;
@@ -52,6 +53,7 @@ int main(int argc, char *argv[]) {
             r = 1;
         }
         io_restaurar();
+        getchar();
         return r;
     }
 
@@ -109,7 +111,7 @@ void mostrar_licencia(void) {
     for (int i = 0; i < lineas; i++) {
         printf("%s\n", LICENCIA_RESUMIDA[i]);
     }
-    printf("\n")
+    printf("\n");
 
     io_iniciar();
 }
