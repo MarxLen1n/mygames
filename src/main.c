@@ -11,11 +11,15 @@
 #include "piedra_papel_tijera/piedra_papel_tijera.h"
 #include "tres_enRaya/tres_enRaya.h"
 #include "tragaperras/tragaperras.h"
+#include "blackjack/blackjack.h"
+#include "caesar/caesar.h"
 
 #define LINEAS_LICENCIA 500
 #define STR_LEN 128
 
 char LICENCIA_RESUMIDA[LINEAS_LICENCIA][STR_LEN];
+char PLACEHOLDER[STR_LEN]="PLACEHOLDER";
+
 int cargar_licencia(void);
 void mostrar_licencia(void);
 
@@ -33,6 +37,8 @@ int main(int argc, char *argv[]) {
         else if (strcmp(argv[1], "--ppt") == 0) r = jugar_piedra_papel_tijera();
         else if (strcmp(argv[1], "--tres") == 0) r = jugar_tres_enRaya();
         else if (strcmp(argv[1], "--tragaperras") == 0) r = jugar_tragaperras();
+        else if (strcmp(argv[1], "--blackjack") == 0) r = jugar_blackjack();
+        else if (strcmp(argv[1], "--casear") == 0) r = exec_caesar();
         else if (strcmp(argv[1], "--license") == 0) {
             mostrar_licencia();
             r = 0;
@@ -45,6 +51,9 @@ int main(int argc, char *argv[]) {
             printf("  --robots          Inicia Robots\n");
             printf("  --tres_eRaya      Inicia Tres en Raya\n");
             printf("  --tragaperras     Inicia la tragaperras\n");
+            printf("  --blackjacj       Inicia una partida de blackjack\n");
+            printf("  --casear          Codificador casear\n");
+            printf("                        uso: casear [rotacion]: caesar 17");
             printf("  --license         Muestra la licencia del proyecto\n");
             printf("  --help            Muestra esta ayuda\n");
             r = 0;
@@ -59,8 +68,9 @@ int main(int argc, char *argv[]) {
 
     // Menu interactivo
     char titulo[STR_LEN] = "MYGAMES", subtitulo[STR_LEN] = "ELIGE UN JUEGO PARA JUGAR";
-    char opciones[][STR_LEN] = {"BUSCAMINAS", "ROBOTS", "AHORCADO", "JUEGO DE LA VIDA", "PIEDRA PAPEL O TIJERA", "TRES EN RAYA"};
-    char len = 6;
+    char opciones[][STR_LEN] = {"BUSCAMINAS", "ROBOTS", "AHORCADO", "JUEGO DE LA VIDA", "PIEDRA PAPEL O TIJERA", 
+                                    "TRES EN RAYA", "TRAGAPERRAS", "BLACKJACK", "CASEAR"};
+    char len = 9;
     bool on = true;
     while (on) {
         char eleccion = menu(titulo, subtitulo, opciones, len);
@@ -71,6 +81,9 @@ int main(int argc, char *argv[]) {
             case 3: jugar_juego_delaVida(); break;
             case 4: io_restaurar(); jugar_piedra_papel_tijera(); io_iniciar(); break;
             case 5: io_restaurar(); jugar_tres_enRaya(); io_iniciar(); break;
+            case 6: jugar_tragaperras();
+            case 7: jugar_blackjack();
+            case 8: exec_caesar();
             default: on = false; break;
         }    char titulo[STR_LEN] = "MYGAMES", subtitulo[STR_LEN] = "ELIGE UN JUEGO PARA JUGAR";
 
